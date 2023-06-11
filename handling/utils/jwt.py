@@ -7,22 +7,17 @@ def decode_token(token: str):
     return decode(token, SECRET, algorithms=[ALGORITHM])
 
 
-def extract_user_id(token: str):
-    decoded = decode_token(token)
-    return decoded['id']
-
-
-def extract_user_autorities(token: str):
-    decoded = decode_token(token)
-    return decoded['role']
-
-
 def expired(token):
     return date.fromtimestamp(token['exp']) < date.now()
 
 
 def locked(token):
     return 'LOCKED' in token['role']
+
+
+def extract_user_info(token):
+    decoded = decode_token(token)
+    return decoded['id'], decoded['role']
 
 
 def validate(token: str):
@@ -33,9 +28,6 @@ def validate(token: str):
 
     return not (locked(decoded) or expired(decoded))
 
-def setup_session(session, token):
-    session['id'] = extract_user_id(token)
-    session['role'] = extract_user_autorities(token)
 
 SECRET = JWT_CONFIG['secret']
 ALGORITHM = JWT_CONFIG['algorithm']

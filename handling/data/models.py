@@ -1,7 +1,6 @@
 from app.urlink import db
 import datetime
 
-
 class Account(db.Model):
     __tablename__ = 'accounts'
     id = db.Column(db.String, primary_key=True)
@@ -12,9 +11,14 @@ class Account(db.Model):
         self.authorities = authorities
 
     @staticmethod
-    def count():
-        return db.session.query(db.func.max(Account.id)).first()
+    def create_user(id):
+        account = Account(id, ['USER'])
+        db.session.add(account)
+        db.session.commit()
 
+    @staticmethod
+    def exists_by_id(id):
+        return Account.query.filter_by(id=id).first() is not None
 
 class Link(db.Model):
     __tablename__ = 'links'

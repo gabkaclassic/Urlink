@@ -1,4 +1,4 @@
-from handling.utils.jwt import validate, extract_user_id as extract_id
+from handling.utils.jwt import validate, extract_user_info as extract_info
 from flask import session
 from flask import Response as response
 from flask import redirect
@@ -19,7 +19,7 @@ class AuthMiddleware:
         request = Request(environ)
         token = request.authorization.token
         if validate(token):
-            environ['id'] = extract_id(token)
+            environ['id'], environ['role'] = extract_info(token)
             return self.app(environ, start_response)
 
         return Response('Authentication failed', status=unauthorized, mimetype='json')

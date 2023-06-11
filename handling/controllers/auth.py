@@ -1,19 +1,15 @@
 from app.urlink import app
-from flask import session, redirect, Response as response, request
-from handling.utils.jwt import extract_user_id as extract_id
-from flask_api.status import (
-    HTTP_200_OK as OK,
-)
+from flask import redirect, request
+
+from handling.data.models import Account
+
+
 @app.route('/auth', methods=['GET'])
 async def auth():
-
-
     id = request.environ['id']
-    print(id)
+    authorities = request.environ['role']
 
-    return response(status=OK)
+    if not Account.exists_by_id(id) and 'ADMIN' not in authorities:
+        Account.create_user(id)
 
-    # if id is not None:
-    #     return redirect('/statistics')
-    # else:
-    #     response(status=401)
+    return redirect('/statistics')
