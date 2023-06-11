@@ -19,4 +19,7 @@ DB_CONFIG = {
     'name': get('URLINK_DB_NAME'),
     'host': get('URLINK_DB_HOST'),
     'port': get('URLINK_DB_PORT'),
-}
+  }
+
+DB_URI = 'postgresql://%(user)s:%(password)s@%(host)s:%(port)s/%(name)s' % DB_CONFIG
+
