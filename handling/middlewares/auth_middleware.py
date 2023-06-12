@@ -16,7 +16,6 @@ class AuthMiddleware:
 
         request = Request(environ)
 
-
         if request.path.startswith('/ref/'):
             return self.app(environ, start_response)
 

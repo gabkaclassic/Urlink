@@ -2,6 +2,7 @@ from requests import get
 from handling.data.models.visits import Visit
 from handling.data.models.links import Link
 
+
 DEFAULT_VAL = 'Unknown'
 COUNTRY = 'country'
 REGION = 'region'
@@ -33,11 +34,11 @@ async def registration_visit(ip, key):
 async def get_statistics(id):
     links = Link.get_all_by_owner(id)
     statistics = []
-
     for link in links:
         statistics.append(await Visit.statistics(link))
+    res = [tuple(row) for l1 in statistics for l2 in l1 for row in l2]
 
-    return statistics
+    return res
 
 
 LOCATION_API_PATTERN = 'https://ipinfo.io/{ip:s}/json'
