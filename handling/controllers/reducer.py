@@ -1,6 +1,6 @@
 from app.urlink import app
 from flask import request, Response
-from handling.data.models import Link
+from handling.data.models.links import Link
 from flask_api.status import HTTP_200_OK as OK
 
 
@@ -8,6 +8,7 @@ from flask_api.status import HTTP_200_OK as OK
 def reduce():
     id = request.environ['id']
     original = request.json['url']
-    Link.create(original, id)
+    title = request.json['title']
+    formatted = Link.create(id, original, title,  request.root_url)
 
-    return Response(status=OK)
+    return Response(formatted, status=OK)

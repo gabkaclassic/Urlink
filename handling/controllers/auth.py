@@ -1,7 +1,8 @@
 from app.urlink import app
 from flask import redirect, request
+from handling.data.models.accounts import Account
 
-from handling.data.models import Account
+from handling.data.models import accounts
 
 
 @app.route('/auth', methods=['GET'])

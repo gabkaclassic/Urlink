@@ -3,10 +3,10 @@ from flask import request, redirect
 from handling.utils.statistics import registration_visit
 
 
-@app.route('/ref/<formatted>')
-async def referer():
-    formatted = request.view_args['formatted']
+@app.route('/ref/<key>')
+async def referer(key):
+
     ip = request.remote_addr
-    original = await registration_visit(ip, formatted)
+    original = await registration_visit(ip, key)
 
     return redirect(original)

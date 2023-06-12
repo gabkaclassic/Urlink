@@ -1,2 +1,3 @@
 run:
-	python app.py
+	venv/bin/python3 app.py
+

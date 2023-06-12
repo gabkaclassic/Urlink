@@ -28,4 +28,7 @@ Session(app)
 
 # Setup controllers
 from handling.controllers import auth
+from handling.controllers import statistics
+from handling.controllers import referer
+from handling.controllers import reducer
 
