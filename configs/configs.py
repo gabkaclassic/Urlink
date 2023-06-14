@@ -6,7 +6,10 @@ from os import getenv as get
 BASE_DIR = Path(__file__).resolve().parent.parent
 load(BASE_DIR / 'dev.env')
 
-DEBUG = get('DEBUG')
+
+DEBUG = get('URLINK_DEBUG')
+PORT = get('URLINK_PORT')
+HOST = get('URLINK_HOST')
 
 JWT_CONFIG = {
     'secret': get('URLINK_JWT_SECRET'),
