@@ -1,7 +1,7 @@
 from requests import get
 
 from handling.data.services.links_service import *
-from handling.data.services.visit_service import *
+from handling.data.services.visit_service import statistics as statistics_by_link
 
 
 DEFAULT_VAL = 'Unknown'
@@ -35,7 +35,7 @@ async def get_statistics(id):
     links = get_all_by_owner(id)
     statistics = []
     for link in links:
-        statistics.append(await statistics(link))
+        statistics.append(await statistics_by_link(link))
     res = [tuple(row) for l1 in statistics for l2 in l1 for row in l2]
 
     return res

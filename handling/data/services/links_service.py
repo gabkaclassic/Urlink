@@ -13,7 +13,7 @@ def __generate_random_string():
 
 
 def create(owner_id, original, title, base_url):
-    key = Link.__generate_random_string()
+    key = __generate_random_string()
     formatted = base_url + 'ref/' + key
 
     link = Link(

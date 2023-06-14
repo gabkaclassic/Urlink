@@ -2,4 +2,7 @@ from requests import get
 
 
 def ping(url):
-    return get(url).ok
+    try:
+        return get(url, timeout=5).ok
+    except:
+        return False

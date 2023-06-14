@@ -1,6 +1,8 @@
-from jwt import decode, ExpiredSignatureError, InvalidTokenError
-from configs.configs import JWT_CONFIG
 from datetime import datetime as date
+
+from jwt import decode, InvalidTokenError
+
+from configs.configs import JWT_CONFIG
 
 
 def decode_token(token: str):
