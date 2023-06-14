@@ -10,6 +10,8 @@ load(BASE_DIR / 'dev.env')
 DEBUG = get('URLINK_DEBUG')
 PORT = get('URLINK_PORT')
 HOST = get('URLINK_HOST')
+KEY = get('URLINK_SSL_KEY')
+CERT = get('URLINK_SSL_CERT')
 
 JWT_CONFIG = {
     'secret': get('URLINK_JWT_SECRET'),
