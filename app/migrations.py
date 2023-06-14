@@ -3,9 +3,9 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import func
 import asyncio
 def make_migrations(db: SQLAlchemy, app: Flask):
-    from handling.data.models.links import Link
-    from handling.data.models.visits import Visit
-    from handling.data.models.accounts import Account
+    from handling.data.entities.links import Link
+    from handling.data.entities.visits import Visit
+    from handling.data.entities.accounts import Account
 
     with app.app_context():
         pass

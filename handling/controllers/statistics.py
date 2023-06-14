@@ -8,7 +8,7 @@ from handling.utils.statistics import get_statistics
 
 @app.route('/statistics', methods=['GET'])
 def statistics():
-    id = request.environ['id']
+    id = request.environ.get('id')
     statistics = asyncio.run(get_statistics(id))
 
     return json(statistics)

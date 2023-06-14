@@ -1,6 +1,6 @@
 from app.urlink import app
 from flask import request, Response
-from handling.data.models.links import Link
+from handling.data.services.links_service import *
 from flask_api.status import HTTP_200_OK as OK, HTTP_400_BAD_REQUEST as BAD
 from handling.utils.pinger import ping
 
@@ -14,6 +14,6 @@ def reduce():
 
     id = request.environ['id']
     title = request.json['title']
-    formatted = Link.create(id, original, title,  request.root_url)
+    formatted = create(id, original, title,  request.root_url)
 
     return Response(formatted, status=OK)

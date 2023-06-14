@@ -1,31 +1,28 @@
-from alembic.util import status
 from flask_api.status import (
     HTTP_401_UNAUTHORIZED as unauthorized,
 )
-from werkzeug.wrappers import Request, Response
+from flask import abort, request, Response
+from jwt import ExpiredSignatureError
 
+from app.urlink import app
 from handling.utils.jwt import validate, extract_user_info as extract_info
 
 
-class AuthMiddleware:
+@app.before_request
+def auth_middleware():
+    if request.path.startswith('/ref/'):
+        return
 
-    def __init__(self, app):
-        self.app = app
 
-    def __call__(self, environ, start_response):
+    if request.authorization is None:
+        abort(unauthorized)
 
-        request = Request(environ)
+    token = request.authorization.token
 
-        if request.path.startswith('/ref/'):
-            return self.app(environ, start_response)
-
-        if request.authorization is None:
-            return start_response(request, status=401)
-
-        token = request.authorization.token
-
-        if validate(token):
-            environ['id'], environ['role'] = extract_info(token)
-            return self.app(environ, start_response)
-
-        return start_response(request)
+    if validate(token):
+        try:
+            request.environ['id'], request.environ['role'] = extract_info(token)
+            return
+        except ExpiredSignatureError:
+            abort(401)
+    abort(unauthorized)

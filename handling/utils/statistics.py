@@ -1,6 +1,7 @@
 from requests import get
-from handling.data.models.visits import Visit
-from handling.data.models.links import Link
+
+from handling.data.services.links_service import *
+from handling.data.services.visit_service import *
 
 
 DEFAULT_VAL = 'Unknown'
@@ -24,18 +25,17 @@ async def get_location(ip):
 
 async def registration_visit(ip, key):
     location = get_location(ip)
-    link = Link.get_by_key(key)
-    print(link)
-    await Visit.create(link, await location)
+    link = get_by_key(key)
+    await create(link, await location)
 
     return link.original
 
 
 async def get_statistics(id):
-    links = Link.get_all_by_owner(id)
+    links = get_all_by_owner(id)
     statistics = []
     for link in links:
-        statistics.append(await Visit.statistics(link))
+        statistics.append(await statistics(link))
     res = [tuple(row) for l1 in statistics for l2 in l1 for row in l2]
 
     return res

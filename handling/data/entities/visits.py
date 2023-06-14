@@ -19,24 +19,3 @@ class Visit(db.Model):
         self.city = location['city']
         self.region = location['region']
         self.time = datetime.datetime.now()
-
-    @staticmethod
-    async def create(link: Link, location):
-        visit = Visit(link, location)
-        db.session.add(visit)
-        db.session.commit()
-
-    @staticmethod
-    async def statistics_by(link, by):
-        return db.session.query(by, func.count(1)) \
-            .filter_by(visited_link=link.formatted) \
-            .group_by(by) \
-            .all()
-
-    @staticmethod
-    async def statistics(link):
-        return [
-            await Visit.statistics_by(link, Visit.country),
-            await Visit.statistics_by(link, Visit.region),
-            await Visit.statistics_by(link, Visit.city),
-        ]

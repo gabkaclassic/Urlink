@@ -1,10 +1,13 @@
-from jwt import decode
+from jwt import decode, ExpiredSignatureError, InvalidTokenError
 from configs.configs import JWT_CONFIG
 from datetime import datetime as date
 
 
 def decode_token(token: str):
-    return decode(token, SECRET, algorithms=[ALGORITHM])
+    try:
+        return decode(token, SECRET, algorithms=[ALGORITHM])
+    except InvalidTokenError:
+        raise InvalidTokenError
 
 
 def expired(token):
@@ -24,7 +27,10 @@ def validate(token: str):
     if token is None:
         return False
 
-    decoded = decode_token(token)
+    try:
+        decoded = decode_token(token)
+    except InvalidTokenError:
+        return False
 
     return not (locked(decoded) or expired(decoded))
 
