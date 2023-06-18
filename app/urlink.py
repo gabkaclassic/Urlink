@@ -5,10 +5,15 @@ from flask_sqlalchemy import SQLAlchemy
 from configs.configs import DB_URI
 from configs.configs import DEBUG
 from .migrations import make_migrations
+import logging
 
 # Creating app
 app = Flask(__name__)
 app.config.from_object(__name__)
+
+from configs import logger_config
+
+logging.debug("App starting...")
 
 # Setup database
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
