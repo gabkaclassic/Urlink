@@ -29,6 +29,7 @@ from handling.controllers import referer
 from handling.controllers import reducer
 
 # Setup error handlers
+from handling.error_handlers import unauthorized_handler
 
 # Setup middlewares
 from handling.middlewares.auth_middleware import auth_middleware
