@@ -3,4 +3,5 @@
 venv
 logs
 *.log
+*.pyc
 app/migrations.py

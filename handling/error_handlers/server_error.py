@@ -1,8 +1,10 @@
 from app.urlink import app
-from werkzeug.exceptions import InternalServerError
+from werkzeug.exceptions import HTTPException
 from flask import Response
-@app.errorhandler(InternalServerError)
+import logging
+@app.errorhandler(HTTPException)
 def handle(error):
 
+    logging.error(error.description)
 
-    return Response("Invalid token", status=InternalServerError.code)
+    return Response("Server error", status=error.code)

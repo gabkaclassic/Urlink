@@ -13,8 +13,6 @@ app.config.from_object(__name__)
 
 from configs import logger_config
 
-logging.debug("App starting...")
-
 # Setup database
 app.config['SQLALCHEMY_DATABASE_URI'] = DB_URI
 app.config['SQLALCHEMY_ECHO'] = DEBUG

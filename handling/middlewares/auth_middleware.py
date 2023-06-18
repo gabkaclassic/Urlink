@@ -10,6 +10,8 @@ from handling.utils.jwt import validate, extract_user_info as extract_info
 
 @app.before_request
 def auth_middleware():
+
+    abort(401)
     if request.path.startswith('/ref/'):
         return
 
