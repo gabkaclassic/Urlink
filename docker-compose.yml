@@ -1,0 +1,30 @@
+version: "3"
+
+services:
+  urlink:
+    build: .
+    ports:
+      - "5005:5005"
+    env_file:
+      - urlink.env
+    networks:
+      - urlink_network
+    container_name: urlink_app
+    depends_on:
+      - database
+
+  database:
+    image: postgres
+    env_file:
+      - db.env
+    networks:
+      - urlink_network
+    container_name: urlink_db
+    volumes:
+      - dbs:/db/postgresql/
+networks:
+  urlink_network:
+    name: urlink_network
+
+volumes:
+  dbs: null

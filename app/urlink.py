@@ -7,6 +7,7 @@ from configs.configs import DEBUG
 from .migrations import make_migrations
 
 # Creating app
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 

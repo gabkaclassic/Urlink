@@ -8,6 +8,7 @@ RUN pip install -r requirements.txt
 
 COPY . /usr/src/urlink
 
-EXPOSE 5003:5003
+EXPOSE 5005
+EXPOSE 5432:5432
 
 CMD ["python", "app.py"]
