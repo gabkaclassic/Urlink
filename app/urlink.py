@@ -34,6 +34,9 @@ from handling.controllers import reducer
 
 # Setup error handlers
 from handling.error_handlers import unauthorized_handler
+from handling.error_handlers import not_found_handler
+from handling.error_handlers import server_error
+
 
 # Setup middlewares
 from handling.middlewares.auth_middleware import auth_middleware
