@@ -8,6 +8,7 @@ from .migrations import make_migrations
 import logging
 
 # Creating app
+
 app = Flask(__name__)
 app.config.from_object(__name__)
 
