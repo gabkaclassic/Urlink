@@ -2,8 +2,8 @@ from flask import Flask
 from flask_migrate import Migrate
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
-from configs.configs import DB_URI
-from configs.configs import DEBUG
+from configs.app_config import DEBUG
+from configs.db_config import DB_URI
 from .migrations import make_migrations
 import logging
 

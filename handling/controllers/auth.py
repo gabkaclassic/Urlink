@@ -11,5 +11,5 @@ async def auth():
     if (not exists_by_id(id)
         and authorities is not None
         and'ADMIN' not in authorities):
-        Account.create_user(id)
+        create_user(id)
     return redirect('/statistics')
