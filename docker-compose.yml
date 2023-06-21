@@ -23,8 +23,7 @@ services:
     volumes:
       - dbs:/db/postgresql/
 networks:
-  urlink_network:
-    name: urlink_network
+  urlink_network
 
 volumes:
   dbs: null
